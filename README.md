@@ -38,7 +38,8 @@ Button button1 = new Button(Material.DIAMOND_SWORD, 1, "&cButton 1");
 button1.setMoveable(true); // Button now moveable in the inventory.
 
 Button button2 = new Button(Material.WORKBENCH, 1, "&6Button 2");
-button2.setAction(new CommandAction("help")); // Button now executes the command "/help" on click.
+button2.getActions().add(new CommandAction("help", ClickType.LEFT)); // Button now executes the command "/help" on click.
+button2.setCloseOnClick(true); // Closes the GUI when this button is clicked.
 
 List<String> lore = button2.getLore(); // Gets button lore.
 lore.add("&7Click to do /help."); // Adds lore to the button.
