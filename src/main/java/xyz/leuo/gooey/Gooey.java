@@ -1,9 +1,11 @@
 package xyz.leuo.gooey;
 
+import lombok.Data;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.leuo.gooey.listeners.InventoryClickListener;
 import xyz.leuo.gooey.tasks.Refresher;
 
+@Data
 public class Gooey {
 
     private static Gooey instance;

@@ -15,8 +15,12 @@ import java.util.List;
 public class Button extends ItemStack {
 
     private @Getter @Setter ItemMeta meta = this.getItemMeta();
-    private @Getter @Setter Action action;
-    private @Getter @Setter boolean moveable;
+    private @Getter @Setter List<Action> actions;
+    private @Getter @Setter boolean moveable, closeOnClick;
+
+    public String getName() {
+        return this.meta.getDisplayName();
+    }
 
     public void setName(String name) {
         this.meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
@@ -55,6 +59,8 @@ public class Button extends ItemStack {
         super(material, amount, (short) 0);
         this.setName(name);
         this.moveable = false;
+        this.closeOnClick = false;
         this.meta.setLore(new ArrayList<>());
+        this.actions = new ArrayList<>();
     }
 }

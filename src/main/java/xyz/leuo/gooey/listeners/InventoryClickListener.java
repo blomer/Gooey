@@ -34,8 +34,11 @@ public class InventoryClickListener implements Listener {
                     event.setCancelled(true);
                 }
 
-                Action action = button.getAction();
-                if(action != null) {
+                if(button.isCloseOnClick()) {
+                    player.closeInventory();
+                }
+
+                for(Action action : button.getActions()) {
                     action.run(player, gui, button, clickType);
                 }
             }
