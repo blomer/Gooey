@@ -18,7 +18,7 @@ public class GUI implements InventoryHolder {
 
     private UUID instanceId;
     private String title;
-    private int size;
+    private Integer size;
     private boolean autoRefresh;
     private Map<Integer, Button> buttons;
     private ItemStack background;

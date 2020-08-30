@@ -107,6 +107,7 @@ button.setAction(new Action() {
 
 For your GUI, you can set custom update methods for a more dynamic GUI.
 
+**Example**
 ```java
 GUI gui = new GUI("Another Gooey GUI", 9);
 gui.setUpdate(new GUIUpdate() {
