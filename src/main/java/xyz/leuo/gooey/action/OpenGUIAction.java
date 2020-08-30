@@ -7,11 +7,11 @@ import xyz.leuo.gooey.gui.GUI;
 
 public class OpenGUIAction implements Action{
 
-    private GUI gui;
+    private final GUI gui;
 
     @Override
     public void run(Player player, GUI gui, Button button, ClickType clickType) {
-        player.openInventory(gui.getInventory());
+        player.openInventory(this.gui.getInventory());
     }
 
     /**

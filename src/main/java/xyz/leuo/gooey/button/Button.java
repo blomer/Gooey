@@ -14,8 +14,8 @@ import java.util.List;
 
 public class Button extends ItemStack {
 
-    private @Getter @Setter ItemMeta meta = this.getItemMeta();
-    private @Getter @Setter List<Action> actions;
+    private @Getter @Setter ItemMeta meta;
+    private @Getter @Setter Action action;
     private @Getter @Setter boolean moveable, closeOnClick;
 
     public String getName() {
@@ -28,14 +28,22 @@ public class Button extends ItemStack {
         this.update();
     }
 
+    /**
+     * Gets the lore directly from the ItemMeta.
+     * @return Lore list.
+     */
     public List<String> getLore() {
         return this.meta.getLore();
     }
 
-    public void setLore(List<String> lore) {
+    /**
+     * Sets the lore for this button.
+     * @param strings The lines of lore.
+     */
+    public void setLore(String... strings) {
         List<String> list = new ArrayList<>();
-        for(String line : lore) {
-            list.add(ChatColor.translateAlternateColorCodes('&', line));
+        for(String string : strings) {
+            list.add(ChatColor.translateAlternateColorCodes('&', string));
         }
 
         this.meta.setLore(list);
@@ -57,10 +65,10 @@ public class Button extends ItemStack {
      */
     public Button(Material material, int amount, String name) {
         super(material, amount, (short) 0);
+        this.meta = this.getItemMeta();
         this.setName(name);
         this.moveable = false;
         this.closeOnClick = false;
         this.meta.setLore(new ArrayList<>());
-        this.actions = new ArrayList<>();
     }
 }

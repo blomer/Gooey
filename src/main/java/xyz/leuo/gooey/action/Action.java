@@ -6,7 +6,5 @@ import xyz.leuo.gooey.button.Button;
 import xyz.leuo.gooey.gui.GUI;
 
 public interface Action {
-
     void run(Player player, GUI gui, Button button, ClickType clickType);
-
 }

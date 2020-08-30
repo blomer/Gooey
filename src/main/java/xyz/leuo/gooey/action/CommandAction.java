@@ -11,8 +11,8 @@ import xyz.leuo.gooey.gui.GUI;
 @Data
 public class CommandAction implements Action{
 
-    private String command;
-    private ClickType clickType;
+    private final String command;
+    private final ClickType clickType;
 
     @Override
     public void run(Player player, GUI gui, Button button, ClickType clickType) {
@@ -23,14 +23,9 @@ public class CommandAction implements Action{
             }
         }
 
-        PlayerCommandPreprocessEvent playerCommandPreprocessEvent = new PlayerCommandPreprocessEvent(player, command);
-        Bukkit.getPluginManager().callEvent(playerCommandPreprocessEvent);
-
-        if(!playerCommandPreprocessEvent.isCancelled()) {
-            String c = this.command;
-            c = c.replace("%player%", player.getName());
-            player.performCommand(c);
-        }
+        String c = this.command;
+        c = c.replace("%player%", player.getName());
+        player.performCommand(c);
     }
 
     /**
