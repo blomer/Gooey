@@ -3,6 +3,7 @@ package xyz.leuo.gooey.gui;
 import lombok.Data;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -18,7 +19,7 @@ public class GUI implements InventoryHolder {
 
     private UUID instanceId;
     private String title;
-    private Integer size;
+    private int size;
     private boolean autoRefresh;
     private Map<Integer, Button> buttons;
     private ItemStack background;
@@ -32,11 +33,11 @@ public class GUI implements InventoryHolder {
         }
     }
 
-    public void setButton(Integer slot, Button button) {
+    public void setButton(int slot, Button button) {
         this.buttons.put(slot, button);
     }
 
-    public void removeButton(Integer slot) {
+    public void removeButton(int slot) {
         this.buttons.remove(slot);
     }
 
@@ -47,7 +48,7 @@ public class GUI implements InventoryHolder {
     public void removeButton(Button button) {
     }
 
-    public Button getButton(Integer slot) {
+    public Button getButton(int slot) {
         if(this.buttons.size() > slot) {
             return this.buttons.get(slot);
         } else {
@@ -59,16 +60,16 @@ public class GUI implements InventoryHolder {
     public Inventory getInventory() {
         Inventory inventory = Bukkit.createInventory(this, size, ChatColor.translateAlternateColorCodes('&', title));
 
+        if(this.background != null) {
+            for(int x = 0; x < inventory.getSize(); x++) {
+                inventory.setItem(x, this.background);
+            }
+        }
+
         for(Map.Entry<Integer, Button> entry : this.buttons.entrySet()) {
             Button button = entry.getValue();
             button.update();
             inventory.setItem(entry.getKey(), button);
-        }
-
-        if(this.background != null) {
-            for(int x = 0; x < inventory.getSize() - 1; x++) {
-                inventory.setItem(x, this.background);
-            }
         }
 
         return inventory;
@@ -78,12 +79,11 @@ public class GUI implements InventoryHolder {
         player.openInventory(this.getInventory());
     }
 
+    /**
+     * Updates the GUI with whatever GUIUpdate method was set for this GUI.
+     */
     public void update() {
-        List<HumanEntity> viewers = this.getInventory().getViewers();
-        for(HumanEntity viewer : viewers) {
-            this.update.onUpdate(this);
-            viewer.openInventory(this.getInventory());
-        }
+        this.update.onUpdate(this);
     }
 
     /**

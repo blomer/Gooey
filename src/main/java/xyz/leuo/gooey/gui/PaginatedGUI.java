@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 public class PaginatedGUI extends GUI {
 
-    private Integer currentPage;
+    private int currentPage;
     private List<Button> pageButtons;
 
     @Override
@@ -23,7 +23,7 @@ public class PaginatedGUI extends GUI {
     }
 
     @Override
-    public void setButton(Integer slot, Button button) {
+    public void setButton(int slot, Button button) {
         this.pageButtons.add(slot, button);
     }
 
@@ -33,7 +33,7 @@ public class PaginatedGUI extends GUI {
     }
 
     @Override
-    public Button getButton(Integer slot) {
+    public Button getButton(int slot) {
         Button button = null;
         int i = slot + (this.currentPage * (this.getSize() - 9));
         if(slot < this.getSize() - 9) {
@@ -60,7 +60,7 @@ public class PaginatedGUI extends GUI {
         return this.getPage(0);
     }
 
-    public Inventory getPage(Integer pageNumber) {
+    public Inventory getPage(int pageNumber) {
         Inventory inventory = Bukkit.createInventory(this, this.getSize(), this.getTitle());
 
         if(this.hasPage(pageNumber)) {
@@ -103,11 +103,6 @@ public class PaginatedGUI extends GUI {
 
     public boolean hasPage(Integer pageNumber) {
         return pageNumber * (this.getSize() - 9) < this.pageButtons.size();
-    }
-
-    @Override
-    public void update() {
-        this.getUpdate().onUpdate(this);
     }
 
     /**

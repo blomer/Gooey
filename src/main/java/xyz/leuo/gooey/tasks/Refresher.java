@@ -6,12 +6,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.leuo.gooey.Gooey;
 import xyz.leuo.gooey.gui.GUI;
+import xyz.leuo.gooey.gui.PaginatedGUI;
 
 public class Refresher {
 
     public Refresher(JavaPlugin plugin, Gooey gooey) {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, ()-> {
-            for(Player player : Bukkit.getOnlinePlayers()) {
+            for(Player player : plugin.getServer().getOnlinePlayers()) {
                 if(player.getOpenInventory().getTopInventory() != null) {
                     Inventory inventory = player.getOpenInventory().getTopInventory();
                     if(inventory.getHolder() instanceof GUI) {
@@ -19,12 +20,15 @@ public class Refresher {
                         if(gui.getUpdate() != null) {
                             if (gui.getInstanceId() == gooey.getInstanceId()) {
                                 gui.update();
+                                if(!(gui instanceof PaginatedGUI)) {
+                                    gui.open(player);
+                                }
                             }
                         }
                     }
                 }
             }
-        }, 0, 10);
+        }, 0, 20);
 
     }
 }
