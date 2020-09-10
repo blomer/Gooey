@@ -49,11 +49,7 @@ public class GUI implements InventoryHolder {
     }
 
     public Button getButton(int slot) {
-        if(this.buttons.size() > slot) {
-            return this.buttons.get(slot);
-        } else {
-            return null;
-        }
+        return this.buttons.get(slot);
     }
 
     @Override

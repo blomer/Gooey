@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import xyz.leuo.gooey.action.Action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Button extends ItemStack {
 
@@ -66,9 +68,30 @@ public class Button extends ItemStack {
     public Button(Material material, int amount, String name) {
         super(material, amount, (short) 0);
         this.meta = this.getItemMeta();
-        this.setName(name);
+        if(name != null) {
+            this.setName(name);
+        }
         this.moveable = false;
         this.closeOnClick = false;
         this.meta.setLore(new ArrayList<>());
+    }
+
+    public Button(ItemStack itemStack, String name) {
+        super(itemStack.getType(), itemStack.getAmount(), itemStack.getDurability());
+        this.setItemMeta(itemStack.getItemMeta());
+        this.meta = this.getItemMeta();
+        if(name != null) {
+            this.setName(name);
+        }
+        this.moveable = false;
+        this.closeOnClick = false;
+
+        if(itemStack.getEnchantments() != null) {
+            this.addEnchantments(itemStack.getEnchantments());
+        }
+
+        if(this.meta.getLore() == null) {
+            this.meta.setLore(new ArrayList<>());
+        }
     }
 }

@@ -28,26 +28,30 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        Inventory inventory = event.getInventory();
+        Inventory inventory = event.getClickedInventory();
+        ItemStack item = event.getCurrentItem();
         ClickType clickType = event.getClick();
 
-        if(inventory.getHolder() != null && inventory.getHolder() instanceof GUI) {
-            GUI gui = (GUI) inventory.getHolder();
-            if(gui.getInstanceId() == this.gooey.getInstanceId()) {
-                Button button;
-                if(event.getSlot() != -999) {
-                    button = gui.getButton(event.getSlot());
-                    if(button != null) {
-                        if(!button.isMoveable()) {
+        if(inventory != null) {
+            if(inventory.getHolder() != null && inventory.getHolder() instanceof GUI) {
+                GUI gui = (GUI) inventory.getHolder();
+                if(gui.getInstanceId() == this.gooey.getInstanceId()) {
+                    Button button;
+                    if(item != null) {
+                        button = gui.getButton(event.getSlot());
+                        if(button != null) {
+                            if(!button.isMoveable()) {
+                                event.setCancelled(true);
+                                if(button.isCloseOnClick()) {
+                                    player.closeInventory();
+                                }
+                            }
+
+                            if(button.getAction() != null) {
+                                button.getAction().run(player, gui, button, clickType);
+                            }
+                        } else {
                             event.setCancelled(true);
-                        }
-
-                        if(button.isCloseOnClick()) {
-                            player.closeInventory();
-                        }
-
-                        if(button.getAction() != null) {
-                            button.getAction().run(player, gui, button, clickType);
                         }
                     }
                 }
