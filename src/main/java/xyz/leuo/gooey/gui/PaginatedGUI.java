@@ -63,7 +63,7 @@ public class PaginatedGUI extends GUI {
     public Inventory getPage(int pageNumber) {
         Inventory inventory = Bukkit.createInventory(this, this.getSize(), this.getTitle());
 
-        if(this.hasPage(pageNumber)) {
+        if(this.hasPage(pageNumber) || this.currentPage == 0) {
             this.currentPage = pageNumber;
             final int inv = this.getSize() - 9;
             final int index = this.currentPage * inv;
