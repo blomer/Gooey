@@ -52,6 +52,16 @@ public class Button extends ItemStack {
         this.update();
     }
 
+    public void setLore(List<String> lore) {
+        List<String> list = new ArrayList<>();
+        for(String string : lore) {
+            list.add(ChatColor.translateAlternateColorCodes('&', string));
+        }
+
+        this.meta.setLore(list);
+        this.update();
+    }
+
     /**
      * Updates the ItemMeta for this ItemStack. You should never have to directly call this method.
      */

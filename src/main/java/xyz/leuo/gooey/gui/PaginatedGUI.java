@@ -16,6 +16,7 @@ public class PaginatedGUI extends GUI {
 
     private int currentPage;
     private List<Button> pageButtons;
+    private Button backButton, nextButton;
 
     @Override
     public void addButton(Button button) {

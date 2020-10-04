@@ -23,13 +23,19 @@ public class GUI implements InventoryHolder {
     private boolean autoRefresh;
     private Map<Integer, Button> buttons;
     private ItemStack background;
-    private GUIUpdate update;
+    private GUIUpdate update, closeUpdate;
 
     public void addButton(Button button) {
         if(buttons.isEmpty()) {
             this.buttons.put(0, button);
         } else {
             this.buttons.put(buttons.size(), button);
+        }
+    }
+
+    public void addButtons(Button... buttons) {
+        for(Button button : buttons) {
+            this.addButton(button);
         }
     }
 
