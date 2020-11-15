@@ -78,8 +78,7 @@ public class PaginatedGUI extends GUI {
                 }
             }
 
-            Button separator = new Button(Material.STAINED_GLASS_PANE, 1, " ");
-            separator.setDurability((short) 15);
+            Button separator = new Button(Material.BLACK_STAINED_GLASS_PANE, 1, " ");
             for(int x = this.getSize() - 9; x < this.getSize(); x++) {
                 inventory.setItem(x, separator);
             }
