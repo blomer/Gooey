@@ -18,7 +18,7 @@ public class Button extends ItemStack {
 
     private @Getter @Setter ItemMeta meta;
     private @Getter @Setter Action action;
-    private @Getter @Setter boolean moveable, closeOnClick;
+    private @Getter @Setter boolean closeOnClick;
 
     public String getName() {
         return this.meta.getDisplayName();
@@ -40,7 +40,7 @@ public class Button extends ItemStack {
 
     /**
      * Sets the lore for this button.
-     * @param strings The lines of lore.
+     * @param strings Strings.
      */
     public void setLore(String... strings) {
         List<String> list = new ArrayList<>();
@@ -52,6 +52,10 @@ public class Button extends ItemStack {
         this.update();
     }
 
+    /**
+     * Sets the lore for this button.
+     * @param lore String list.
+     */
     public void setLore(List<String> lore) {
         List<String> list = new ArrayList<>();
         for(String string : lore) {
@@ -75,13 +79,18 @@ public class Button extends ItemStack {
      * @param amount The amount of the ItemStack.
      * @param name The name of the Button/Item.
      */
+
+    public Button(Material material, String name) {
+        this(material, 1, name);
+    }
+
     public Button(Material material, int amount, String name) {
         super(material, amount, (short) 0);
         this.meta = this.getItemMeta();
         if(name != null) {
             this.setName(name);
         }
-        this.moveable = false;
+
         this.closeOnClick = false;
         this.meta.setLore(new ArrayList<>());
     }
@@ -93,7 +102,7 @@ public class Button extends ItemStack {
         if(name != null) {
             this.setName(name);
         }
-        this.moveable = false;
+
         this.closeOnClick = false;
 
         if(itemStack.getEnchantments() != null) {

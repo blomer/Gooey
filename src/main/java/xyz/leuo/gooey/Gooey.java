@@ -3,7 +3,6 @@ package xyz.leuo.gooey;
 import lombok.Data;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.leuo.gooey.listeners.InventoryClickListener;
-import xyz.leuo.gooey.listeners.InventoryCloseListener;
 import xyz.leuo.gooey.tasks.Refresher;
 
 import java.util.UUID;
@@ -21,11 +20,6 @@ public class Gooey {
         this.instanceId = UUID.randomUUID();
 
         new InventoryClickListener(this.plugin, this);
-        new InventoryCloseListener(this.plugin, this);
         new Refresher(this.plugin, this);
-    }
-
-    public static Gooey getInstance() {
-        return instance;
     }
 }

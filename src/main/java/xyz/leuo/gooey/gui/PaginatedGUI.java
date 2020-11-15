@@ -101,7 +101,7 @@ public class PaginatedGUI extends GUI {
         }
     }
 
-    public boolean hasPage(Integer pageNumber) {
+    public boolean hasPage(int pageNumber) {
         return pageNumber * (this.getSize() - 9) < this.pageButtons.size();
     }
 
@@ -110,7 +110,7 @@ public class PaginatedGUI extends GUI {
      * @param title Inventory title.
      * @param size Inventory size.
      */
-    public PaginatedGUI(String title, Integer size) {
+    public PaginatedGUI(String title, int size) {
         super(title, size);
 
         if(size < 18) {

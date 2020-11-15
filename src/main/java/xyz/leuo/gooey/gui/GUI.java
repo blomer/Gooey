@@ -23,7 +23,7 @@ public class GUI implements InventoryHolder {
     private boolean autoRefresh;
     private Map<Integer, Button> buttons;
     private ItemStack background;
-    private GUIUpdate update, closeUpdate;
+    private GUIUpdate update;
 
     public void addButton(Button button) {
         if(buttons.isEmpty()) {
@@ -77,6 +77,10 @@ public class GUI implements InventoryHolder {
         return inventory;
     }
 
+    /**
+     * Opens the GUI for a player.
+     * @param player The player that will see the GUI.
+     */
     public void open(Player player) {
         player.openInventory(this.getInventory());
     }
@@ -94,7 +98,7 @@ public class GUI implements InventoryHolder {
      * @param size Inventory size.
      */
     public GUI(String title, int size) {
-        this.instanceId = Gooey.getInstance().getInstanceId();
+        this.instanceId = Gooey.instance.getInstanceId();
         this.title = title;
         this.size = size;
         this.autoRefresh = false;

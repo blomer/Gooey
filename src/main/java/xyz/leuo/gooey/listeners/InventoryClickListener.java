@@ -36,19 +36,17 @@ public class InventoryClickListener implements Listener {
             if(inventory.getHolder() != null && inventory.getHolder() instanceof GUI) {
                 GUI gui = (GUI) inventory.getHolder();
                 if(gui.getInstanceId() == this.gooey.getInstanceId()) {
+                    event.setCancelled(true);
                     Button button;
                     if(item != null) {
                         button = gui.getButton(event.getSlot());
                         if(button != null) {
-                            if(!button.isMoveable()) {
-                                event.setCancelled(true);
-                                if(button.isCloseOnClick()) {
-                                    player.closeInventory();
-                                }
+                            if(button.isCloseOnClick()) {
+                                player.closeInventory();
                             }
 
                             if(button.getAction() != null) {
-                                button.getAction().run(player, gui, button, clickType);
+                                button.getAction().run(player, gui, button, event);
                             }
                         } else {
                             event.setCancelled(true);
