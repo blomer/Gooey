@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -29,8 +30,8 @@ public class InventoryClickListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Inventory inventory = event.getClickedInventory();
+        Inventory topInventory = event.getView().getTopInventory() == null ? null : event.getView().getTopInventory();
         ItemStack item = event.getCurrentItem();
-        ClickType clickType = event.getClick();
 
         if(inventory != null) {
             if(inventory.getHolder() != null && inventory.getHolder() instanceof GUI) {
@@ -54,6 +55,10 @@ public class InventoryClickListener implements Listener {
                     }
                 }
             }
+        }
+
+        if(!event.isCancelled() && topInventory.getHolder() != null && topInventory.getHolder() instanceof GUI && event.getAction().equals(InventoryAction.MOVE_TO_OTHER_INVENTORY)) {
+            event.setCancelled(true);
         }
     }
 }

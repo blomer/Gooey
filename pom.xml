@@ -6,7 +6,7 @@
 
     <groupId>xyz.leuo</groupId>
     <artifactId>Gooey</artifactId>
-    <version>1.1.6-current</version>
+    <version>1.1.7-current</version>
 
     <repositories>
         <repository>
