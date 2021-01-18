@@ -1,17 +1,15 @@
 package xyz.leuo.gooey.listeners;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.leuo.gooey.Gooey;
-import xyz.leuo.gooey.action.Action;
+import xyz.leuo.gooey.action.ButtonAction;
 import xyz.leuo.gooey.button.Button;
 import xyz.leuo.gooey.gui.GUI;
 
@@ -46,8 +44,8 @@ public class InventoryClickListener implements Listener {
                                 player.closeInventory();
                             }
 
-                            if(button.getAction() != null) {
-                                button.getAction().run(player, gui, button, event);
+                            if(button.getButtonAction() != null) {
+                                button.getButtonAction().run(player, gui, button, event);
                             }
                         } else {
                             event.setCancelled(true);

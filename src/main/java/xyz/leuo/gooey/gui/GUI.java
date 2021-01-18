@@ -24,6 +24,7 @@ public class GUI implements InventoryHolder {
     private Map<Integer, Button> buttons;
     private ItemStack background;
     private GUIUpdate update;
+    private GUICloseUpdate guiCloseUpdate;
 
     public void addButton(Button button) {
         if(buttons.isEmpty()) {

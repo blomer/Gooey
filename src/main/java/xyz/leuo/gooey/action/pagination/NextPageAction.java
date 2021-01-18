@@ -2,14 +2,13 @@ package xyz.leuo.gooey.action.pagination;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import xyz.leuo.gooey.action.Action;
+import xyz.leuo.gooey.action.ButtonAction;
 import xyz.leuo.gooey.button.Button;
 import xyz.leuo.gooey.gui.GUI;
 import xyz.leuo.gooey.gui.PaginatedGUI;
 
-public class NextPageAction implements Action {
+public class NextPageAction implements ButtonAction {
     @Override
     public void run(Player player, GUI gui, Button button, InventoryClickEvent event) {
         if(gui instanceof PaginatedGUI) {

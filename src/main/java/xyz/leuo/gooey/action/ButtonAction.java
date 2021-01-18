@@ -6,6 +6,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import xyz.leuo.gooey.button.Button;
 import xyz.leuo.gooey.gui.GUI;
 
-public interface Action {
+public interface ButtonAction {
     void run(Player player, GUI gui, Button button, InventoryClickEvent inventoryClickEvent);
 }

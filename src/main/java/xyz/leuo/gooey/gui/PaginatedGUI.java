@@ -45,10 +45,10 @@ public class PaginatedGUI extends GUI {
             if(this.getPage(this.currentPage).getItem(slot).getType() == Material.ARROW) {
                 if (slot == this.getSize() - 1) {
                     button = new Button(Material.ARROW, 1, "&eNext Page");
-                    button.setAction(new NextPageAction());
+                    button.setButtonAction(new NextPageAction());
                 } else if (slot == this.getSize() - 9) {
                     button = new Button(Material.ARROW, 1, "&cPrevious Page");
-                    button.setAction(new LastPageAction());
+                    button.setButtonAction(new LastPageAction());
                 }
             }
         }
@@ -78,20 +78,20 @@ public class PaginatedGUI extends GUI {
                 }
             }
 
-            Button separator = new Button(Material.BLACK_STAINED_GLASS_PANE, 1, " ");
+            Button separator = new Button(Material.GLASS_PANE, 1, " ");
             for(int x = this.getSize() - 9; x < this.getSize(); x++) {
                 inventory.setItem(x, separator);
             }
 
             if(this.hasPage(pageNumber + 1)) {
-                Button button = new Button(Material.ARROW, 1, "&eNext Page");
-                button.setAction(new NextPageAction());
+                Button button = new Button(Material.ARROW, pageNumber + 1, "&eNext Page");
+                button.setButtonAction(new NextPageAction());
                 inventory.setItem(this.getSize() - 1, button);
             }
 
             if(pageNumber != 0) {
-                Button button = new Button(Material.ARROW, 1, "&cPrevious Page");
-                button.setAction(new LastPageAction());
+                Button button = new Button(Material.ARROW, pageNumber - 1, "&cPrevious Page");
+                button.setButtonAction(new LastPageAction());
                 inventory.setItem(this.getSize() - 9, button);
             }
 

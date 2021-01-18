@@ -3,6 +3,7 @@ package xyz.leuo.gooey;
 import lombok.Data;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.leuo.gooey.listeners.InventoryClickListener;
+import xyz.leuo.gooey.listeners.InventoryCloseListener;
 import xyz.leuo.gooey.listeners.InventoryDragListener;
 import xyz.leuo.gooey.listeners.InventoryMoveItemListener;
 import xyz.leuo.gooey.tasks.Refresher;
@@ -22,6 +23,7 @@ public class Gooey {
         this.instanceId = UUID.randomUUID();
 
         new InventoryClickListener(this.plugin, this);
+        new InventoryCloseListener(this.plugin, this);
         new InventoryDragListener(this.plugin, this);
         new InventoryMoveItemListener(this.plugin, this);
 

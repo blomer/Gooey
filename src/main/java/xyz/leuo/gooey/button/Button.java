@@ -1,23 +1,21 @@
 package xyz.leuo.gooey.button;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import xyz.leuo.gooey.action.Action;
+import xyz.leuo.gooey.action.ButtonAction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Button extends ItemStack {
 
     private @Getter @Setter ItemMeta meta;
-    private @Getter @Setter Action action;
+    private @Getter @Setter
+    ButtonAction buttonAction;
     private @Getter @Setter boolean closeOnClick;
 
     public String getName() {
@@ -27,6 +25,15 @@ public class Button extends ItemStack {
     public void setName(String name) {
         this.meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
         this.setItemMeta(this.meta);
+        this.update();
+    }
+
+    public void addLore(String... strings) {
+        List<String> list = this.meta.getLore();
+        for(String string : strings) {
+            list.add(ChatColor.translateAlternateColorCodes('&', string));
+        }
+
         this.update();
     }
 
@@ -76,7 +83,6 @@ public class Button extends ItemStack {
     /**
      * Create a button to be added into a GUI.
      * @param material The material of the ItemStack.
-     * @param amount The amount of the ItemStack.
      * @param name The name of the Button/Item.
      */
 

@@ -5,14 +5,11 @@
  The answer is simple. **Gooey** is very easy to use and is extremely flexible.
  With **Gooey** you can create custom GUIs, clickable items (buttons), and custom actions for the buttons you create.
  
- ## New In Version 1.1
+ ## New in Version 1.2
  
- - **Paginated GUIs!**
- - Custom GUI update methods.
- - Easier way to add lore to Buttons.
- - GUI#addButton method.
- - Instance IDs, allows you to have theoretically unlimited instances of **Gooey** on your server.
- - Bug fixes.
+ - **Global Compatibility!** You can now use this version of Gooey on any Bukkit/Spigot API version!
+ - GUICloseUpdate, executes one tick after a GUI was closed.
+ - Other smaller additions and bug fixes.
  
  ## How to use
  
@@ -44,6 +41,12 @@ Player player; // Get the player somehow.
 GUI gui = new GUI("A Gooey GUI", 9); // Initialize the GUI.
 
 Button button1 = new Button(Material.DIAMOND_SWORD, 1, "&cButton 1");
+button1.setButtonAction(new ButtonAction() {
+    @Override
+    public void run(Player player, GUI gui, Button button, InventoryClickEvent inventoryClickEvent) {
+        player.sendMessage("Hello!");
+    }
+});
 
 Button button2 = new Button(Material.WORKBENCH, 1, "&6Button 2");
 button2.setCloseOnClick(true); // Closes the GUI when this button is clicked.
@@ -60,50 +63,9 @@ gui.open(player) // Opens the GUI for the player.
 
 ![GUI Example]("https://image.prntscr.com/image/J6JhuX94QXyPupWDTs60rQ.png")
 
-## Custom Actions
-
-Creating custom actions are actually quite simple.
-
-- Create the custom action.
-
-**Example**
-```java
-public class ExampleAction implements Action {
-
-    private String command;
-
-    @Override
-    public void run(Player player, GUI gui, Button button, ClickType clickType) {
-        if(clickType == ClickType.RIGHT) { // Checks if the click was a right click.
-            player.performCommand(this.command); // Executes the command specified in the constructor's "command" parameter.
-        }
-    }
-   
-    public ExampleAction(String command) {
-        this.command = command;
-    }
-}
-```
-
-- Use it!
-
-**Example**
-```java
-Button button; // The button you want to attach the action to.
-button.setAction(new ExampleAction("gamemode creative")); // Set the action.
-
-// Or if you want a button to have a unique action, you can do something like this.
-button.setAction(new Action() {
-            @Override
-            public void run(Player player, GUI gui, Button button, ClickType clickType) {
-                player.sendMessage(ChatColor.GREEN + "Test!");
-            }
-        });
-```
-
 ## GUI Updates
 
-For your GUI, you can set custom update methods for a more dynamic GUI.
+GUIs can update every 20 ticks if you set a GUIUpdate for your GUI. These can be used for many things.
 
 **Example**
 ```java
