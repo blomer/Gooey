@@ -84,6 +84,9 @@ public class GUI implements InventoryHolder {
      */
     public void open(Player player) {
         player.openInventory(this.getInventory());
+        if(update != null) {
+            update();
+        }
     }
 
     /**
