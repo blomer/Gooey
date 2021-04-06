@@ -16,7 +16,7 @@ public class PaginatedGUI extends GUI {
 
     private int currentPage;
     private List<Button> pageButtons;
-    private Button backButton, nextButton;
+    private Button separator, backButton, nextButton;
 
     @Override
     public void addButton(Button button) {
@@ -78,9 +78,10 @@ public class PaginatedGUI extends GUI {
                 }
             }
 
-            Button separator = new Button(Material.GLASS_PANE, 1, " ");
-            for(int x = this.getSize() - 9; x < this.getSize(); x++) {
-                inventory.setItem(x, separator);
+            if(separator != null) {
+                for(int x = this.getSize() - 9; x < this.getSize(); x++) {
+                    inventory.setItem(x, separator);
+                }
             }
 
             if(this.hasPage(pageNumber + 1)) {
