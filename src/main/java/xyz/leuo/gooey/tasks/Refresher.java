@@ -17,7 +17,7 @@ public class Refresher {
                     Inventory inventory = player.getOpenInventory().getTopInventory();
                     if(inventory.getHolder() instanceof GUI) {
                         GUI gui = (GUI) inventory.getHolder();
-                        if(gui.getUpdate() != null) {
+                        if(gui.getUpdate() != null && gui.isAutoRefresh()) {
                             if (gui.getInstanceId() == gooey.getInstanceId()) {
                                 gui.update();
                                 if(!(gui instanceof PaginatedGUI)) {
