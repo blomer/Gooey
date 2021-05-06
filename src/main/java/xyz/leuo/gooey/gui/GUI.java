@@ -83,11 +83,14 @@ public class GUI implements InventoryHolder {
      * @param player The player that will see the GUI.
      */
     public void open(Player player) {
-        if(update != null) {
-            update();
-        }
-
         player.openInventory(this.getInventory());
+    }
+
+    public void open(Player player, boolean update) {
+        if(update && this.getUpdate() != null) {
+            this.update();
+        }
+        open(player);
     }
 
     /**
@@ -95,6 +98,17 @@ public class GUI implements InventoryHolder {
      */
     public void update() {
         this.update.onUpdate(this);
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            if(player.getOpenInventory().getTopInventory() != null) {
+                Inventory inventory = player.getOpenInventory().getTopInventory();
+                if(inventory.getHolder() instanceof GUI) {
+                    GUI gui = (GUI) inventory.getHolder();
+                    if(gui.equals(this)) {
+                        gui.open(player);
+                    }
+                }
+            }
+        }
     }
 
     /**
